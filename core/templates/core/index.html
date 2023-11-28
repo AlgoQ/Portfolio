@@ -41,19 +41,19 @@
                                     </ul>
                                 </div>
                             </div>
-                            <p><></p>
+                            <p class="invisible sm:visible"><></p>
                         </a>
                     </div>
                 {% endfor %}
             </div>
-            <div class="projects mb-6 grid grid-cols-1 md:grid-cols-2 gap-x-8">
+            <div class="projects mb-6 grid grid-cols-1 lg:grid-cols-2 gap-x-8">
                 {% for project in projects %}
                     <a href="{{ project.link }}" class="mb-4" target="_blank">
                         <div class="project-inner relative flex flex-col h-full px-6 pt-6 rounded-md">
-                            <div class="project-top absolute right-0 pr-6">
+                            <div class="invisible md:visible project-top absolute right-0 pr-6">
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
                                     <path stroke-linecap="round" stroke-linejoin="round" d="M13.19 8.688a4.5 4.5 0 011.242 7.244l-4.5 4.5a4.5 4.5 0 01-6.364-6.364l1.757-1.757m13.35-.622l1.757-1.757a4.5 4.5 0 00-6.364-6.364l-4.5 4.5a4.5 4.5 0 001.242 7.244" />
-                                  </svg>                                  
+                                </svg>                          
                             </div>
                             <div class="project-content">
                                 <h1 class="project-title text-xl mb-3">{{ project.title }}</h1>
