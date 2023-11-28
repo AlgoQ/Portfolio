@@ -120,6 +120,7 @@ DATABASES = {
         conn_max_age=600,
         conn_health_checks=True,
         ssl_require=True,
+        engine='SQLite',
     ),
 }
 # else:
