@@ -1,26 +1,42 @@
+from django.urls import resolve
 from django.test import TestCase
+from django.http import HttpRequest
 
-# Create your tests here.
+from selenium import webdriver
+
+from core.views import index
+
+class HomePageTest(TestCase):
+    def setUp(self):
+        self.browser = webdriver.Firefox()
+    
+    def tearDown(self):
+        self.browser.quit()
+
+    def test_root_url_resolves_to_index_view(self):
+        found = resolve('/')
+        self.assertEqual(found.func, index)
+
+    def test_index_returns_correct_html(self):
+        request = HttpRequest()
+        response = index(request)
+        html = response.content.decode('utf8')
+        self.assertIn('<title>Kobe Janssens</title>', html)
+        self.assertTrue(html.endswith('</html>'))
+
+    def test_atleast_one_job(self):
+        self.browser.get('http://localhost:8000')
+
+        jobsElement = self.browser.find_element('class name', 'jobs')
+
+        jobsHtml = jobsElement.get_attribute('outerHTML')
+        self.assertIn('job-section', jobsHtml)
 
 
-# Note: The tests below rely upon static assets (for the rendered templates), so require that either:
-# 1. The static assets have been processed - ie: `./manage.py collectstatic` has been run.
-# 2. Or, the tests are run in debug mode (which means WhiteNoise will use auto-refresh mode),
-#    using: `./manage.py test --debug-mode`
-# class ExampleTest(TestCase):
-#     def test_index_page(self):
-#         response = self.client.get("/")
-#         self.assertContains(
-#             response, "Getting Started with Python on Heroku", status_code=200
-#         )
+    def test_atleast_one_project(self):
+        self.browser.get('http://localhost:8000')
 
-#     def test_db_page(self):
-#         # Each time the page is requested, the number of recorded greetings increases.
+        projectsElement = self.browser.find_element('class name', 'projects')
 
-#         first_response = self.client.get("/db/")
-#         self.assertEqual(first_response.status_code, 200)
-#         self.assertEqual(len(first_response.context["greetings"]), 1)
-
-#         second_response = self.client.get("/db/")
-#         self.assertEqual(second_response.status_code, 200)
-#         self.assertEqual(len(second_response.context["greetings"]), 2)
+        projectsHtml = projectsElement.get_attribute('outerHTML')
+        self.assertIn('project-inner', projectsHtml)
