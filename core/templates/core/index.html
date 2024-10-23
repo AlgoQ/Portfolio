@@ -29,7 +29,9 @@
                     <div class="job-section flex mb-4 p-6"> <!-- Use flex and margin bottom for separation -->
                         <a href="{{ job.link }}" class="w-full flex">
                             <div class="w-2/6 text-slate-300 text-sm">
-                                <p class="font-bold">{{ job.startYear }} - {{ job.endYear }}</p><br>
+                                <p class="font-bold">
+                                    {{ job.startYear }} - {% if job.endYear == -1 %}Present{% else %}{{ job.endYear }}{% endif %}
+                                </p><br>
                             </div>
                             <div class="w-4/6 pl-4">
                                 <h1 class="job-title mb-4">{{ job.title }}</h1>
