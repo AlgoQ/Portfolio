@@ -21,6 +21,7 @@ body {
 
 .job-link:hover {
     color: rgba(110, 255, 250, 0.6);
+    transition: color 0.25s ease;
 }
 
 .resume-button {
